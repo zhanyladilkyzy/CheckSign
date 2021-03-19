@@ -1,0 +1,1 @@
+{"extRefNo":"2106143110755000031","srvId":121,"amount":44.0,"currency":"KZT","fee":0.0,"point":"","srvParams":[{"code":"kbk","value":"101201"},{"code":"knp","value":"911"},{"code":"tax","value":"620601"},{"code":"iin","value":"891229302127"},{"code":"name","value":"ГОЛОВАТОВ ИВАН НИКОЛАЕВИЧ"},{"code":"vin","value":"4USBT53544LT26841"}]}
