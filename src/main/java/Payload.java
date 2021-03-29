@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.List;
 
-public class Payload {
+public class Payload implements Serializable {
     private String extRefNo;
     private int srvId;
     private double amount;
@@ -19,6 +20,13 @@ public class Payload {
         this.point = point;
         this.srvParams = srvParams;
     }
+
+//    public Payload(byte[] data) {
+//    }
+
+
+//    public Payload(byte[] data) {
+//    }
 
     public String getExtRefNo() {
         return extRefNo;
