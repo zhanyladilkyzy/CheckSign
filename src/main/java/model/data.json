@@ -1,0 +1,40 @@
+{
+  "id": 28061048,
+  "srvId": "1",
+  "amount": 100,
+  "currency": "KZT",
+  "extRefNo": "129783",
+  "point": "Пункт оплаты",
+  "status": "ojfonaj",
+  "statusName": "Marian Martin",
+  "createDate": "2/20/2026",
+  "finishDate": "12/13/2067",
+  "srvParams": [
+    {
+      "code": "agreement",
+      "name": "Код услуги",
+      "note": "null",
+      "min": "1",
+      "max": "10",
+      "regexpMask": "null",
+      "regexpChk": "null",
+      "prmType": "0",
+      "chkCode": "null",
+      "value": "17.46",
+      "valueList": [
+        {
+          "value": "913",
+          "note": "Штрафы за нарушение законодательства Республики Казахстан"
+        }
+      ]
+    }
+  ],
+  "register": [
+    {
+      "_any_": "koumasa"
+    }
+  ],
+  "accept": "0",
+  "terminal": "88888888",
+  "fee": 10
+}

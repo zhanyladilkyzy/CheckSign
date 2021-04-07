@@ -2,7 +2,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import kz.gov.pki.kalkan.jce.provider.KalkanProvider;
 import kz.gov.pki.kalkan.openssl.PEMWriter;
-import org.omg.IOP.Encoding;
+import model.Data;
+import model.SrvParams;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -31,10 +32,46 @@ public class Example {
 
 
     public static void main(String[] args) throws Exception {
+//        exampleSign();
+        HttpClientExample obj = new HttpClientExample();
+
+        try {
+            AuthResponse authResponse = obj.sendAuth("818a61cf-d7c2-405f-816e-afe386343a02", "qP2kE7jJ5pX8wM8bO1jS2nF3pA7aK3kE8sT4oI8xY0eM4aI2oI");
+//            System.out.println("token = "+ authResponse.getAccess_token());
+//            Data respTrxn = obj.sendTransaction(authResponse.getAccess_token(), createData());
+//            Thread.sleep(3000);
+            obj.sendApprove(4221, authResponse.getAccess_token());
+        } finally {
+            obj.close();
+        }
+    }
+
+    public static Data createData() {
+        Data result = new Data();
+        result.setId((int) (Math.random()*1000000));
+        result.setExtRefNo("2106143110755000033");
+        result.setSrvId(121);
+        result.setAmount(100.00);
+        result.setCurrency("KZT");
+        result.setFee(0.0);
+        result.setPoint("");
+        List<SrvParams> srvParams = new ArrayList<>();
+        srvParams.add(new SrvParams("kbk", "101201"));
+        srvParams.add(new SrvParams("knp", "911"));
+        srvParams.add(new SrvParams("tax", "620601"));
+        srvParams.add(new SrvParams("iin", "891229302127"));
+        srvParams.add(new SrvParams("name", "GOLOVATOV IVAN"));
+        srvParams.add(new SrvParams("vin", "4USBT53544LT26841"));
+        result.setSrvParams(srvParams);
+
+        return result;
+    }
+
+    public static void exampleSign()  throws Exception {
         String filePath = "src/payload.txt";
         System.out.println("read payload from file");
         String payload2 = readAllBytesJava7(filePath);
-       // payload2 = Base64.getEncoder().encodeToString(payload2.getBytes("UTF-8"));
+        // payload2 = Base64.getEncoder().encodeToString(payload2.getBytes("UTF-8"));
 
         Provider provider = new KalkanProvider();
         Security.addProvider(provider);
@@ -55,7 +92,7 @@ public class Example {
         PrivateKey privateKey = (PrivateKey) store.getKey(alias, password.toCharArray());
 
 
-       // Gson gson = new Gson();
+        // Gson gson = new Gson();
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
 //        Payload data = gson.fromJson(payload2, Payload.class);
@@ -92,14 +129,13 @@ public class Example {
         mySign.add(new MySignature(header, Base64.getEncoder().encodeToString(signature)));
         result.setSignatures(mySign);
         String res = gson.toJson(result);
-        System.out.println("res = "+res);
-        System.out.println("UTF-8 res.base64 = "+Base64.getEncoder().encodeToString(res.getBytes()));
-        System.out.println("res.base64 = "+Base64.getEncoder().encodeToString(res.getBytes()));
+        System.out.println("res = " + res);
+        System.out.println("UTF-8 res.base64 = " + Base64.getEncoder().encodeToString(res.getBytes()));
+        System.out.println("res.base64 = " + Base64.getEncoder().encodeToString(res.getBytes()));
 //        byte[] bytes = Encoding.UTF8.GetBytes("abcdef==");
 //        String base64 = Convert.ToBase64String(bytes);
 //        Console.WriteLine(base64);
     }
-
 
     public static String convertToBase64PEMString(X509Certificate x509Cert) throws IOException {
         StringWriter sw = new StringWriter();

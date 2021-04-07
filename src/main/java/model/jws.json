@@ -1,0 +1,15 @@
+{
+  "payload": "",
+  "signatures": [
+    {
+      "header": {
+        "x5c": [
+          "certificate"
+        ],
+        "alg": " {alg} "
+      },
+      "signature": " {signature} "
+    }
+  ]
+}
+

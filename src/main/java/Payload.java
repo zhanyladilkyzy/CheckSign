@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,6 +23,7 @@ public class Payload implements Serializable {
         this.point = point;
         this.srvParams = srvParams;
     }
+
 
 //    public Payload(byte[] data) {
 //    }

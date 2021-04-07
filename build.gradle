@@ -12,6 +12,7 @@ repositories {
 dependencies {
     compile fileTree(dir: 'lib', include: ['*.jar'])
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
