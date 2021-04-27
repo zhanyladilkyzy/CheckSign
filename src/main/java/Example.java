@@ -26,21 +26,26 @@ public class Example {
 
     /**
      * ?????? ??? ???????
+     * 5dc50c4281c79434592fcef77026f7566f3c895d
+     * ���P�:�3v<�}�yN8��˞,<K��g%��Ta� �KH<c�E\`�6AQ��CD�)�}
+     * �g� CT��^H�ϩi<���35�R֎j+>�-�d���>P�;i�ωz�X�.�0��7m��z
      */
     //private static byte[] data = "{\"extRefNo\":\"2106143110755000031\",\"srvId\":121,\"amount\":44.00,\"currency\":\"KZT\",\"fee\":0.0,\"point\":\"\",\"srvParams\":[{\"code\":\"kbk\",\"value\":\"101201\"},{\"code\":\"knp\",\"value\":\"911\"},{\"code\":\"tax\",\"value\":\"620601\"},{\"code\":\"iin\",\"value\":\"891229302127\"},{\"code\":\"name\",\"value\":\"????????? ???? ??????????\"},{\"code\":\"vin\",\"value\":\"4USBT53544LT26841\"}]}".getBytes();
     private static byte[] data = "\\u007b\\u0022\\u0065\\u0078\\u0074\\u0052\\u0065\\u0066\\u004e\\u006f\\u0022\\u003a\\u0022\\u0032\\u0031\\u0030\\u0036\\u0031\\u0034\\u0033\\u0031\\u0031\\u0030\\u0037\\u0035\\u0035\\u0030\\u0030\\u0030\\u0030\\u0033\\u0031\\u0022\\u002c\\u0022\\u0073\\u0072\\u0076\\u0049\\u0064\\u0022\\u003a\\u0031\\u0032\\u0031\\u002c\\u0022\\u0061\\u006d\\u006f\\u0075\\u006e\\u0074\\u0022\\u003a\\u0034\\u0034\\u002e\\u0030\\u0030\\u002c\\u0022\\u0063\\u0075\\u0072\\u0072\\u0065\\u006e\\u0063\\u0079\\u0022\\u003a\\u0022\\u004b\\u005a\\u0054\\u0022\\u002c\\u0022\\u0066\\u0065\\u0065\\u0022\\u003a\\u0030\\u002e\\u0030\\u002c\\u0022\\u0070\\u006f\\u0069\\u006e\\u0074\\u0022\\u003a\\u0022\\u0022\\u002c\\u0022\\u0073\\u0072\\u0076\\u0050\\u0061\\u0072\\u0061\\u006d\\u0073\\u0022\\u003a\\u005b\\u007b\\u0022\\u0063\\u006f\\u0064\\u0065\\u0022\\u003a\\u0022\\u006b\\u0062\\u006b\\u0022\\u002c\\u0022\\u0076\\u0061\\u006c\\u0075\\u0065\\u0022\\u003a\\u0022\\u0031\\u0030\\u0031\\u0032\\u0030\\u0031\\u0022\\u007d\\u002c\\u007b\\u0022\\u0063\\u006f\\u0064\\u0065\\u0022\\u003a\\u0022\\u006b\\u006e\\u0070\\u0022\\u002c\\u0022\\u0076\\u0061\\u006c\\u0075\\u0065\\u0022\\u003a\\u0022\\u0039\\u0031\\u0031\\u0022\\u007d\\u002c\\u007b\\u0022\\u0063\\u006f\\u0064\\u0065\\u0022\\u003a\\u0022\\u0074\\u0061\\u0078\\u0022\\u002c\\u0022\\u0076\\u0061\\u006c\\u0075\\u0065\\u0022\\u003a\\u0022\\u0036\\u0032\\u0030\\u0036\\u0030\\u0031\\u0022\\u007d\\u002c\\u007b\\u0022\\u0063\\u006f\\u0064\\u0065\\u0022\\u003a\\u0022\\u0069\\u0069\\u006e\\u0022\\u002c\\u0022\\u0076\\u0061\\u006c\\u0075\\u0065\\u0022\\u003a\\u0022\\u0038\\u0039\\u0031\\u0032\\u0032\\u0039\\u0033\\u0030\\u0032\\u0031\\u0032\\u0037\\u0022\\u007d\\u002c\\u007b\\u0022\\u0063\\u006f\\u0064\\u0065\\u0022\\u003a\\u0022\\u006e\\u0061\\u006d\\u0065\\u0022\\u002c\\u0022\\u0076\\u0061\\u006c\\u0075\\u0065\\u0022\\u003a\\u0022\\u0413\\u041e\\u041b\\u041e\\u0412\\u0410\\u0422\\u041e\\u0412\\u0020\\u0418\\u0412\\u0410\\u041d\\u0020\\u041d\\u0418\\u041a\\u041e\\u041b\\u0410\\u0415\\u0412\\u0418\\u0427\\u0022\\u007d\\u002c\\u007b\\u0022\\u0063\\u006f\\u0064\\u0065\\u0022\\u003a\\u0022\\u0076\\u0069\\u006e\\u0022\\u002c\\u0022\\u0076\\u0061\\u006c\\u0075\\u0065\\u0022\\u003a\\u0022\\u0034\\u0055\\u0053\\u0042\\u0054\\u0035\\u0033\\u0035\\u0034\\u0034\\u004c\\u0054\\u0032\\u0036\\u0038\\u0034\\u0031\\u0022\\u007d\\u005d\\u007d".getBytes();
 
+    private static String trx_id;
 
     public static void main(String[] args) throws Exception {
 //        exampleSign();
         HttpClientExample obj = new HttpClientExample();
 
         try {
+            trx_id = "2106143110755001000";
             AuthResponse authResponse = obj.sendAuth("818a61cf-d7c2-405f-816e-afe386343a02", "qP2kE7jJ5pX8wM8bO1jS2nF3pA7aK3kE8sT4oI8xY0eM4aI2oI");
-//            System.out.println("token = "+ authResponse.getAccess_token());
-//            Data respTrxn = obj.sendTransaction(authResponse.getAccess_token(), createData());
-//            Thread.sleep(3000);
-            obj.sendApprove(4221, authResponse.getAccess_token());
+            System.out.println("token = "+ authResponse.getAccess_token());
+            Data respTrxn = obj.sendTransaction(authResponse.getAccess_token(), createData());
+            Thread.sleep(3000);
+            obj.sendApprove(trx_id, authResponse.getAccess_token());
         } finally {
             obj.close();
         }
@@ -48,8 +53,9 @@ public class Example {
 
     public static Data createData() {
         Data result = new Data();
-        result.setId((int) (Math.random()*1000000));
-        result.setExtRefNo("2106143110755000033");
+//        result.setId((int) (Math.random()*1000000));
+        result.setId(499810);
+        result.setExtRefNo(trx_id);
         result.setSrvId(121);
         result.setAmount(100.00);
         result.setCurrency("KZT");

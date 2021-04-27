@@ -36,7 +36,7 @@ public class HttpClientExample {
         httpClient.close();
     }
 
-    public void sendApprove(int transId, String token) throws IOException {
+    public void sendApprove(String transId, String token) throws IOException {
         System.out.println("TRANS_ID" + transId);
         HttpGet request = new HttpGet("https://api.bcc.kz/bcc/production/v1/pgs/PAP/transactions/"+transId);
         request.addHeader("Accept", "application/json");
@@ -93,20 +93,23 @@ public class HttpClientExample {
         while (aliases.hasMoreElements()) {
             alias = aliases.nextElement();
         }
-
+        System.out.println("alias = "+alias);
         PrivateKey privateKey = (PrivateKey) store.getKey(alias, password.toCharArray());
         X509Certificate x509Certificate = (X509Certificate) store.getCertificate(alias);
         String sigAlg = x509Certificate.getSigAlgOID();
         Signature sgn = Signature.getInstance(sigAlg, provider.getName());
         sgn.initSign(privateKey);
         sgn.update(payload.getBytes());
+        System.out.println("payload = {"+payload+"}");
+        System.out.println(new String(payload.getBytes()));
         byte[] signature = sgn.sign();
+        System.out.println("signature = {"+new String(signature)+"}");
         List<String> certs = Collections.singletonList(
                 convertToBase64PEMString(x509Certificate).
                         replaceAll("[\r\n]+", "").
                         replace("-----BEGIN CERTIFICATE-----", "").
                         replace("-----END CERTIFICATE-----", ""));
-
+        System.out.println("cert = {"+certs+"}");
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
         Jws result = new Jws();
